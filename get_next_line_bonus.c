@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xjose <xjose@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 01:43:31 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/04 03:15:43 by xjose            ###   ########.fr       */
+/*   Updated: 2024/07/04 03:19:51 by xjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*get_buffer(int fd, char *buffer)
 {
@@ -40,24 +40,24 @@ static char	*get_buffer(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[1024];
 	char		*line;
 	char		*next_line;
 	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = get_buffer(fd, buffer);
-	if (buffer == NULL)
+	buffer[fd] = get_buffer(fd, buffer[fd]);
+	if (buffer[fd] == NULL)
 		return (NULL);
 	i = 0;
-	while (buffer[i] != '\n' && buffer[i])
+	while (buffer[fd][i] != '\n' && buffer[fd][i])
 		i++;
-	if (buffer[i] == '\n')
+	if (buffer[fd][i] == '\n')
 		i += 1;
-	line = ft_substr(buffer, 0, i);
-	next_line = ft_substr(buffer, i, ft_strlen(buffer) - 1);
-	free(buffer);
-	buffer = next_line;
+	line = ft_substr(buffer[fd], 0, i);
+	next_line = ft_substr(buffer[fd], i, ft_strlen(buffer[fd]) - 1);
+	free(buffer[fd]);
+	buffer[fd] = next_line;
 	return (line);
 }
