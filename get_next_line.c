@@ -6,30 +6,27 @@
 /*   By: xjose <xjose@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 01:43:31 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/04 03:15:43 by xjose            ###   ########.fr       */
+/*   Updated: 2024/07/09 15:07:45 by xjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*get_buffer(int fd, char *buffer)
+static char	*get_new_buffer(char *buffer, int fd)
 {
-	char	tmp_buffer[BUFFER_SIZE + 1];
-	int		read_size;
+	static char	tmp_buffer[BUFFER_SIZE + 1];
+	int			rz;
 
-	read_size = 0;
-	while (read_size < BUFFER_SIZE)
+	rz = 0;
+	while (rz < BUFFER_SIZE)
+		tmp_buffer[rz++] = '\0';
+	rz = 1;
+	while (!ft_strchr(tmp_buffer, '\n') && rz != 0)
 	{
-		tmp_buffer[read_size] = '\0';
-		read_size++;
-	}
-	read_size = 1;
-	while (!ft_strchr(tmp_buffer, '\n') && read_size != 0)
-	{
-		read_size = read(fd, tmp_buffer, BUFFER_SIZE);
-		if (read_size < 0 || (read_size == 0 && buffer == NULL))
+		rz = read(fd, tmp_buffer, BUFFER_SIZE);
+		if (rz < 0 || (rz == 0 && buffer == NULL))
 			return (NULL);
-		tmp_buffer[read_size] = '\0';
+		tmp_buffer[rz] = '\0';
 		if (buffer == NULL)
 			buffer = ft_strdup(tmp_buffer);
 		else
@@ -41,13 +38,13 @@ static char	*get_buffer(int fd, char *buffer)
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
-	char		*line;
-	char		*next_line;
+	char		*the_line;
+	char		*rest_line;
 	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = get_buffer(fd, buffer);
+	buffer = get_new_buffer(buffer, fd);
 	if (buffer == NULL)
 		return (NULL);
 	i = 0;
@@ -55,9 +52,9 @@ char	*get_next_line(int fd)
 		i++;
 	if (buffer[i] == '\n')
 		i += 1;
-	line = ft_substr(buffer, 0, i);
-	next_line = ft_substr(buffer, i, ft_strlen(buffer) - 1);
+	the_line = ft_substr(buffer, 0, i);
+	rest_line = ft_substr(buffer, i, ft_strlen(buffer) - 1);
 	free(buffer);
-	buffer = next_line;
-	return (line);
+	buffer = rest_line;
+	return (the_line);
 }

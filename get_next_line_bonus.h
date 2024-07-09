@@ -6,17 +6,15 @@
 /*   By: xjose <xjose@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:52:03 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/04 02:50:35 by xjose            ###   ########.fr       */
+/*   Updated: 2024/07/09 15:09:33 by xjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_BONUS_H
+#ifndef GET_NEXT_LINE_H
 
-# define GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_H
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE

@@ -6,12 +6,13 @@
 /*   By: xjose <xjose@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 02:52:14 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/04 03:08:15 by xjose            ###   ########.fr       */
+/*   Updated: 2024/07/09 15:07:09 by xjose            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 int	main(void)
 {
