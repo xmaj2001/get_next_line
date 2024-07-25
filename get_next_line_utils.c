@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xjose <xjose@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hk <hk@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 09:40:12 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/09 15:02:14 by xjose            ###   ########.fr       */
+/*   Updated: 2024/07/25 11:44:57 by hk               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -42,7 +42,7 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*str_dup;
 	size_t	len;
@@ -86,7 +86,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (join);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*substr;
 	size_t	tmp_len;
