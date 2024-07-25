@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hk <hk@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 01:43:31 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/25 19:02:12 by xjose            ###   ########.fr       */
+/*   Updated: 2024/07/25 18:14:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char *get_new_buffer(char *buffer, int fd)
+static char	*get_new_buffer(char *buffer, int fd)
 {
-	char *tmp_buffer;
-	int rz;
+	char	*tmp_buffer;
+	int		rz;
 
 	rz = 0;
 	tmp_buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
@@ -40,12 +40,12 @@ static char *get_new_buffer(char *buffer, int fd)
 	return (buffer);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *buffer;
-	char *the_line;
-	char *rest_line;
-	int i;
+	static char	*buffer;
+	char		*the_line;
+	char		*rest_line;
+	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
