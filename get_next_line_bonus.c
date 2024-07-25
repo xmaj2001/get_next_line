@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hk <hk@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 01:43:31 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/25 12:41:38 by hk               ###   ########.fr       */
+/*   Updated: 2024/07/25 12:44:27 by hk               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,24 @@ static char *get_new_buffer(char *buffer, int fd)
 
 char *get_next_line(int fd)
 {
-	static char *buffer;
+	static char *buffer[1024];
 	char *the_line;
 	char *rest_line;
 	int i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = get_new_buffer(buffer, fd);
-	if (buffer == NULL)
+	buffer[fd] = get_new_buffer(buffer[fd], fd);
+	if (buffer[fd] == NULL)
 		return (NULL);
 	i = 0;
-	while (buffer[i] != '\n' && buffer[i])
+	while (buffer[fd][i] != '\n' && buffer[fd][i])
 		i++;
-	if (buffer[i] == '\n')
+	if (buffer[fd][i] == '\n')
 		i += 1;
-	the_line = ft_substr(buffer, 0, i);
-	rest_line = ft_substr(buffer, i, ft_strlen(buffer) - i);
-	free(buffer);
-	buffer = rest_line;
+	the_line = ft_substr(buffer[fd], 0, i);
+	rest_line = ft_substr(buffer[fd], i, ft_strlen(buffer[fd]) - i);
+	free(buffer[fd]);
+	buffer[fd] = rest_line;
 	return (the_line);
 }

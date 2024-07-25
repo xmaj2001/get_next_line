@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hk <hk@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 02:52:14 by xjose             #+#    #+#             */
-/*   Updated: 2024/07/25 12:47:27 by hk               ###   ########.fr       */
+/*   Created: 2024/05/13 17:52:03 by xjose             #+#    #+#             */
+/*   Updated: 2024/07/25 12:43:06 by hk               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <fcntl.h>
-#include <stdio.h>
+#ifndef GET_NEXT_LINE_BONUS_H
 
-int main(void)
-{
-	int fd;
-	int fd2;
-	char *tmp;
-	size_t i;
+# define GET_NEXT_LINE_BONUS_H
 
-	i = 0;
-	fd = open("./text", 0);
-	//fd2 = open("./text2", 0);
-	while (1)
-	{
-		tmp = get_next_line(fd);
-		if (tmp == NULL)
-			break;
-		printf("%s", tmp);
-		free(tmp);
-		i++;
-	}
-	return (0);
-}
+# include <stdlib.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_strdup(char *s1);
+char	*ft_strchr(char *s, int c);
+char	*ft_strjoin(char *left_str, char *buff);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+
+size_t	ft_strlen(char *s);
+#endif
